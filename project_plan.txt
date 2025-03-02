@@ -1,0 +1,61 @@
+#Sequoia Drone Services
+
+modular code
+
+
+Home 
+
+services section:
+
+Photo / Video
+
+Asset Inspection
+
+Thermal Imaging & Inspections
+
+Mapping & Agriculture Applications
+
+Real Estate Photography
+
+Search & Rescue, Municipal Applications
+
+Events / Livestream
+
+contact US
+
+
+index.html
+section/
+header.js
+section1.js
+section2.js
+section3.js
+footer.js
+css/
+
+
+-------------
+i need to build a award winning drone landing page
+
+here is what i want, just create me the frist hero section,
+
+i have provide u an image
+
+this is very cool hero section, i need my design sense to be that type
+
+i have a drone model use that.
+
+my folder has some textures and other files ,make sure to user that
+
+and also make the code modular
+speartae css files for each section
+
+and all the section should be modular
+index.html
+section/
+header.js
+section1.js
+section2.js
+section3.js
+footer.js
+css/
