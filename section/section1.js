@@ -220,6 +220,46 @@ function renderHeroSection() {
             margin: 20px 0;
         }
         
+        /* Add styling for the drone loader */
+        .drone-loader {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 8px;
+            z-index: 10;
+            transition: opacity 0.5s ease;
+        }
+        
+        .drone-loader-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(248, 193, 101, 0.2);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+        
+        .drone-loader-text {
+            color: var(--primary-color);
+            font-size: 14px;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
         .drone-shadow {
             position: absolute;
             bottom: -10px;
@@ -394,19 +434,23 @@ function createStars() {
 }
 
 function setupHeroAnimation() {
-    // Check if Three.js is loaded
-    if (typeof THREE === 'undefined') {
-        console.error('Three.js is not loaded');
-        loadFallbackImage();
-        return;
-    }
-
+    // Get drone container and loader
     const container = document.getElementById('drone-model-container');
-    const touchInstruction = document.getElementById('touch-instruction');
     const droneLoader = document.getElementById('drone-loader');
+    const touchInstruction = document.getElementById('touch-instruction');
     
+    // Make sure loader elements exist
     if (!container) return;
-
+    
+    // Ensure the loader is visible before loading starts
+    if (droneLoader) {
+        droneLoader.style.display = 'flex';
+        droneLoader.style.opacity = '1';
+        if (droneLoader.querySelector('.drone-loader-text')) {
+            droneLoader.querySelector('.drone-loader-text').textContent = 'Loading Model 0%';
+        }
+    }
+    
     // Check for mobile or low-power devices to reduce quality if needed
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     const isLowEnd = navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4;
@@ -528,6 +572,16 @@ function setupHeroAnimation() {
         if (droneLoader && droneLoader.querySelector('.drone-loader-text')) {
             const percent = Math.round(progress * 100);
             droneLoader.querySelector('.drone-loader-text').textContent = `Loading Model ${percent}%`;
+            
+            // Optionally update loader appearance based on progress
+            if (percent > 0) {
+                // Make the spinner border reflect the loading progress
+                const spinner = droneLoader.querySelector('.drone-loader-spinner');
+                if (spinner) {
+                    spinner.style.borderTopColor = `var(--primary-color)`;
+                    // Could add more visual feedback here if desired
+                }
+            }
         }
     };
     
@@ -606,13 +660,20 @@ function setupHeroAnimation() {
     loader.load(
         'assets/3d_model/drone.obj',
         (object) => {
-            // Hide loader once model is loaded
+            // Update loader to show 100% before hiding
+            loadingProgress = 1.0;
+            updateLoaderText(loadingProgress);
+            
+            // Hide loader after showing 100% for a moment
             if (droneLoader) {
-                // Fade out loader
-                droneLoader.style.opacity = '0';
+                // Small delay to show the 100% complete
                 setTimeout(() => {
-                    droneLoader.style.display = 'none';
-                }, 500);
+                    // Fade out loader
+                    droneLoader.style.opacity = '0';
+                    setTimeout(() => {
+                        droneLoader.style.display = 'none';
+                    }, 500);
+                }, 800); // Show 100% for 800ms before fading
             }
             
             // Scale and position
