@@ -34,6 +34,9 @@ function renderHeroSection() {
                         <div class="drone-loader-text">Loading Model</div>
                     </div>
                     
+                    <!-- Fallback image while loading -->
+                    <img src="assets/image/drone_fall_back_image.png" alt="Drone" class="drone-fallback-image" id="drone-fallback-image">
+                    
                     <!-- 3D model will be loaded here -->
                     <div class="drone-shadow"></div>
                     <div id="touch-instruction" class="touch-instruction">Drag to rotate</div>
@@ -237,6 +240,29 @@ function renderHeroSection() {
             transition: opacity 0.5s ease;
         }
         
+        /* Styling for fallback image */
+        .drone-fallback-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 80%;
+            max-height: 80%;
+            z-index: 1;
+            opacity: 1;
+            transition: opacity 0.5s ease;
+            animation: float 2s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translate(-50%, -50%);
+            }
+            50% {
+                transform: translate(-50%, -55%);
+            }
+        }
+        
         .drone-loader-spinner {
             width: 40px;
             height: 40px;
@@ -438,6 +464,7 @@ function setupHeroAnimation() {
     const container = document.getElementById('drone-model-container');
     const droneLoader = document.getElementById('drone-loader');
     const touchInstruction = document.getElementById('touch-instruction');
+    const fallbackImage = document.getElementById('drone-fallback-image');
     
     // Make sure loader elements exist
     if (!container) return;
@@ -449,6 +476,13 @@ function setupHeroAnimation() {
         if (droneLoader.querySelector('.drone-loader-text')) {
             droneLoader.querySelector('.drone-loader-text').textContent = 'Loading Model 0%';
         }
+    }
+    
+    // Check if Three.js is loaded
+    if (typeof THREE === 'undefined') {
+        console.error('Three.js is not loaded');
+        loadFallbackImage();
+        return;
     }
     
     // Check for mobile or low-power devices to reduce quality if needed
@@ -670,8 +704,17 @@ function setupHeroAnimation() {
                 setTimeout(() => {
                     // Fade out loader
                     droneLoader.style.opacity = '0';
+                    
+                    // Also hide fallback image
+                    if (fallbackImage) {
+                        fallbackImage.style.opacity = '0';
+                    }
+                    
                     setTimeout(() => {
                         droneLoader.style.display = 'none';
+                        if (fallbackImage) {
+                            fallbackImage.style.display = 'none';
+                        }
                     }, 500);
                 }, 800); // Show 100% for 800ms before fading
             }
@@ -771,7 +814,26 @@ function setupHeroAnimation() {
             if (droneLoader) {
                 droneLoader.style.display = 'none';
             }
-            loadFallbackImage();
+            
+            // Make sure fallback image is visible if loading fails
+            if (fallbackImage) {
+                fallbackImage.style.opacity = '1';
+                fallbackImage.style.zIndex = '5';
+                
+                // Add floating animation
+                if (typeof gsap !== 'undefined') {
+                    gsap.to(fallbackImage, {
+                        y: 15,
+                        duration: 2,
+                        repeat: -1,
+                        yoyo: true,
+                        ease: "power1.inOut"
+                    });
+                }
+            } else {
+                // If fallback image element doesn't exist for some reason
+                loadFallbackImage();
+            }
         }
     );
 
