@@ -3,13 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DJI Mini 3 Pro | Professional Camera Drone</title>
+    <title>Sequoia Drone Services | Professional Drone Solutions</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/hero.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Add browser hints for performance -->
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 </head>
 <body>
     <div id="app">
@@ -19,27 +22,122 @@
         <!-- Hero section will be inserted here by JavaScript -->
         <div id="hero-container"></div>
         
-        <!-- Additional sections will be inserted here -->
-        <div id="section1-container"></div>
-        <div id="section2-container"></div>
-        <div id="section3-container"></div>
+        <!-- Service section will be inserted here -->
+        <div id="services-container"></div>
+        
+        <!-- Testimonials section will be inserted here -->
+        <div id="testimonials-container"></div>
         
         <!-- Footer will be inserted here by JavaScript -->
         <div id="footer-container"></div>
     </div>
 
     <!-- JavaScript libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/MTLLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/TextureLoader.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/MTLLoader.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/TextureLoader.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js" defer></script>
+    
+    <!-- Performance optimization script -->
+    <script>
+        // Detect low-end devices and set a flag for the entire app
+        window.isLowEndDevice = false;
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+            (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4)) {
+            window.isLowEndDevice = true;
+            // Add class to body for CSS optimizations
+            document.body.classList.add('low-end-device');
+        }
+        
+        // Create a single global IntersectionObserver for all fade animations
+        document.addEventListener('DOMContentLoaded', () => {
+            // Global scroll performance optimization
+            let scrollTimeout;
+            const body = document.body;
+            
+            // Add class during scroll to disable certain animations
+            window.addEventListener('scroll', function() {
+                if (!body.classList.contains('is-scrolling')) {
+                    body.classList.add('is-scrolling');
+                }
+                
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(function() {
+                    body.classList.remove('is-scrolling');
+                }, 100);
+            }, { passive: true });
+            
+            // Initialize a single global observer
+            window.globalScrollObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Add the active class with small delay to stagger
+                        setTimeout(() => {
+                            entry.target.classList.add('active');
+                        }, Math.random() * 100);
+                        window.globalScrollObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '50px'
+            });
+        });
+    </script>
+    
+    <!-- Non-module JavaScript - Add defer for performance -->
+    <script src="section/header.js" defer></script>
+    <script src="section/section1.js" defer></script>
+    <script src="section/footer.js" defer></script>
     
     <!-- JavaScript modules -->
-    <script src="section/header.js"></script>
-    <script src="section/section1.js"></script>
-    <script src="section/section2.js"></script>
-    <script src="section/section3.js"></script>
-    <script src="section/footer.js"></script>
+    <script type="module">
+        // Import the services section
+        import createServicesSection from './section/section2.js';
+        
+        // Import the testimonials section
+        import createTestimonialsSection from './section/section3.js';
+        
+        // Wait for DOM content to be loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Append services section
+            const servicesContainer = document.getElementById('services-container');
+            if (servicesContainer) {
+                const servicesSection = createServicesSection();
+                servicesContainer.appendChild(servicesSection);
+            }
+            
+            // Append testimonials section
+            const testimonialsContainer = document.getElementById('testimonials-container');
+            if (testimonialsContainer) {
+                const testimonialsSection = createTestimonialsSection();
+                testimonialsContainer.appendChild(testimonialsSection);
+            }
+            
+            // Initialize observation of fade elements using the global observer
+            const observeFadeElements = () => {
+                const fadeElements = document.querySelectorAll('.fade-in');
+                
+                // Use the global observer if it exists
+                if (window.globalScrollObserver) {
+                    // Observe elements with a small stagger to distribute load
+                    fadeElements.forEach((element, index) => {
+                        setTimeout(() => {
+                            window.globalScrollObserver.observe(element);
+                        }, index * 10);
+                    });
+                }
+            };
+            
+            // Call after a short delay to ensure all elements are rendered
+            // But use requestIdleCallback if available for better performance
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(() => setTimeout(observeFadeElements, 300));
+            } else {
+                setTimeout(observeFadeElements, 500);
+            }
+        });
+    </script>
 </body>
 </html>
