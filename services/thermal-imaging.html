@@ -12,12 +12,10 @@
     <!-- GSAP for Animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
-    <!-- Header Component -->
-    <script src="header-component.js"></script>
 </head>
 
 <body class="bg-gray-900 text-white overflow-x-hidden">
-    <header-component></header-component>
+    <div id="header-container"></div>
 
     <!-- Hero Section with Thermal Overlay Effect -->
     <section class="relative h-[60vh] w-full overflow-hidden">
@@ -52,9 +50,9 @@
                 </div>
                 <div class="relative group" data-aos="fade-left">
                     <div class="thermal-image-container">
-                        <img src="assets/image/thermal_normal.jpg" alt="Normal View"
+                        <img src="../assets/image/thermal_normal.jpg" alt="Normal View"
                             class="rounded-lg shadow-lg w-full transition-opacity duration-500">
-                        <img src="assets/image/thermal_infrared.jpg" alt="Thermal View"
+                        <img src="../assets/image/thermal_infrared.jpg" alt="Thermal View"
                             class="absolute top-0 left-0 w-full h-full rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     </div>
                     <div
@@ -86,7 +84,7 @@
             <!-- Thermal Applications -->
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
                 <div class="thermal-showcase" data-aos="fade-right">
-                    <img src="assets/image/thermal_building.jpg" alt="Thermal Building Scan"
+                    <img src="../assets/image/thermal_building.jpg" alt="Thermal Building Scan"
                         class="rounded-lg shadow-lg w-full">
                 </div>
                 <div class="space-y-6" data-aos="fade-left">
@@ -119,7 +117,6 @@
         </div>
     </section>
 
-    <!-- Add custom styles for animations -->
     <style>
         .thermal-overlay {
             background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff);
@@ -171,20 +168,10 @@
         }
     </style>
 
-    <!-- Include footer -->
-    <div id="footer-placeholder"></div>
+    <div id="footer-container"></div>
 
-    <!-- Header and Footer Loading Scripts -->
-    <script>
-        // Load Footer
-        fetch('footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer-placeholder').innerHTML = data;
-            })
-            .catch(error => console.error('Error loading footer:', error));
-    </script>
-
+    <script src="../section/header.js" defer></script>
+    <script src="../section/footer.js" defer></script>
     <!-- AOS Initialization -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
