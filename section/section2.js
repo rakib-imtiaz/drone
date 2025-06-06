@@ -1,10 +1,11 @@
+console.log("section2.js loaded")
 // Section 2 Component
 document.addEventListener('DOMContentLoaded', () => {
     const section2Container = document.getElementById('section2-container');
-    
+
     if (section2Container) {
         renderSection2();
-        
+
         // Initialize fade-in animation
         setTimeout(() => {
             observeFadeElements();
@@ -14,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function renderSection2() {
     const section2Container = document.getElementById('section2-container');
-    
+
     // Create the services section HTML
     const section2HTML = `
         <!-- Services Section -->
@@ -26,34 +27,34 @@ function renderSection2() {
                 <div class="services-grid grid-3 fade-in">
                     <div class="service-card">
                         <div class="service-card-image">
-                            <img src="img/services/crop-monitoring.jpg" alt="Crop Monitoring">
+                            <img src="img/services/photo-video.jpg" alt="Photo and Video">
                         </div>
                         <div class="service-card-content">
-                            <h3 class="service-card-title">Crop Monitoring</h3>
-                            <p class="service-card-text">Regular aerial monitoring to identify crop health issues, pest infestations, and nutrient deficiencies before they escalate.</p>
-                            <a href="#contact" class="service-card-link">Learn More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                            <h3 class="service-card-title">Photo and Video</h3>
+                            <p class="service-card-text">Professional aerial photography and videography for agriculture, real estate, events, and more. Capture stunning visuals from above with our advanced drone technology.</p>
+                            <a href="services/photo-video.html" class="service-card-link">Learn More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
                         </div>
                     </div>
                     
                     <div class="service-card">
                         <div class="service-card-image">
-                            <img src="img/services/precision-spraying.jpg" alt="Precision Spraying">
+                            <img src="img/services/mapping-agriculture.jpg" alt="Mapping and Agriculture">
                         </div>
                         <div class="service-card-content">
-                            <h3 class="service-card-title">Precision Spraying</h3>
-                            <p class="service-card-text">Targeted application of fertilizers and pesticides, reducing costs and environmental impact while improving crop yields.</p>
-                            <a href="#contact" class="service-card-link">Learn More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                            <h3 class="service-card-title">Mapping and Agriculture</h3>
+                            <p class="service-card-text">High-precision mapping and agricultural analysis using drone technology. Get detailed topographical maps, crop health insights, and data-driven recommendations for your fields.</p>
+                            <a href="services/mapping-agriculture.html" class="service-card-link">Learn More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
                         </div>
                     </div>
                     
                     <div class="service-card">
                         <div class="service-card-image">
-                            <img src="img/services/thermal-analysis.jpg" alt="Thermal Analysis">
+                            <img src="img/services/thermal-imaging.jpg" alt="Thermal Imaging">
                         </div>
                         <div class="service-card-content">
-                            <h3 class="service-card-title">Thermal Analysis</h3>
-                            <p class="service-card-text">Identify irrigation issues and pest infestations with advanced thermal imaging, allowing for precise intervention.</p>
-                            <a href="#contact" class="service-card-link">Learn More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                            <h3 class="service-card-title">Thermal Imaging</h3>
+                            <p class="service-card-text">Advanced thermal imaging for crop health, irrigation assessment, and pest detection. Identify issues early and optimize your agricultural operations with actionable thermal data.</p>
+                            <a href="services/thermal-imaging.html" class="service-card-link">Learn More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
                         </div>
                     </div>
                     
@@ -64,7 +65,7 @@ function renderSection2() {
                         <div class="service-card-content">
                             <h3 class="service-card-title">Field Mapping</h3>
                             <p class="service-card-text">Detailed topographical and crop health mapping for data-driven farming decisions and improved resource allocation.</p>
-                            <a href="#contact" class="service-card-link">Learn More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                            <a href="services/field-mapping.html" class="service-card-link">Learn More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
                         </div>
                     </div>
                     
@@ -75,7 +76,7 @@ function renderSection2() {
                         <div class="service-card-content">
                             <h3 class="service-card-title">Plant Counting</h3>
                             <p class="service-card-text">Accurate plant population analysis using AI-powered drone imagery to evaluate germination rates and optimize planting.</p>
-                            <a href="#contact" class="service-card-link">Learn More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                            <a href="services/plant-counting.html" class="service-card-link">Learn More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
                         </div>
                     </div>
                     
@@ -86,7 +87,7 @@ function renderSection2() {
                         <div class="service-card-content">
                             <h3 class="service-card-title">Irrigation Assessment</h3>
                             <p class="service-card-text">Evaluate irrigation system performance and identify areas of water stress or system failures to improve water efficiency.</p>
-                            <a href="#contact" class="service-card-link">Learn More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
+                            <a href="services/irrigation-assessment.html" class="service-card-link">Learn More <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
                         </div>
                     </div>
                 </div>
@@ -131,9 +132,9 @@ function renderSection2() {
             </div>
         </section>
     `;
-    
+
     section2Container.innerHTML = section2HTML;
-    
+
     // Add additional styles for parallax effect with the fixed background
     const style = document.createElement('style');
     style.textContent = `
@@ -209,7 +210,7 @@ function renderSection2() {
         }
     `;
     document.head.appendChild(style);
-    
+
     // Initialize fade-in animation
     setTimeout(() => {
         observeFadeElements();
@@ -219,7 +220,7 @@ function renderSection2() {
 // Function to observe and activate fade-in elements - optimize for performance
 function observeFadeElements() {
     const fadeElements = document.querySelectorAll('.fade-in');
-    
+
     // Use a single observer for all elements with options to improve performance
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -228,7 +229,7 @@ function observeFadeElements() {
                 setTimeout(() => {
                     entry.target.classList.add('active');
                 }, 50);
-                
+
                 // Unobserve after animation to save resources
                 observer.unobserve(entry.target);
             }
@@ -238,7 +239,7 @@ function observeFadeElements() {
         // Add rootMargin to start loading earlier
         rootMargin: '50px'
     });
-    
+
     // Observe elements with a small delay between each to avoid processing spikes
     fadeElements.forEach((element, index) => {
         // Stagger the observation to spread the load
@@ -246,7 +247,7 @@ function observeFadeElements() {
             observer.observe(element);
         }, index * 10);
     });
-    
+
     // Clean up observer on page unload
     window.addEventListener('beforeunload', () => {
         observer.disconnect();
@@ -256,7 +257,7 @@ function observeFadeElements() {
 // Services Section
 const createServicesSection = () => {
     const wrapper = document.createElement('div');
-    
+
     // Create the services section
     const section = document.createElement('section');
     section.id = 'services';
@@ -272,15 +273,15 @@ const createServicesSection = () => {
 
     const titleDiv = document.createElement('div');
     titleDiv.className = 'text-center';
-    
+
     const title = document.createElement('h2');
     title.className = 'section-title';
     title.innerHTML = 'Our <span class="text-gradient">Services</span>';
-    
+
     const subtitle = document.createElement('p');
     subtitle.className = 'section-subtitle';
     subtitle.textContent = 'Leveraging cutting-edge drone technology to deliver exceptional aerial solutions for your specific needs.';
-    
+
     titleDiv.appendChild(title);
     titleDiv.appendChild(subtitle);
     container.appendChild(titleDiv);
@@ -295,19 +296,19 @@ const createServicesSection = () => {
             image: 'assets/image/drone_above_field.png',
             title: 'Photo & Video',
             description: 'High-resolution aerial photography and cinematic videography to showcase your property, event, or project from breathtaking perspectives.',
-            link: '#photo-video'
+            link: 'services/photo-video.html'
         },
         {
             image: 'assets/image/drone_in_field_insecticide.png',
             title: 'Mapping & Agriculture',
             description: 'Precision agriculture mapping and analysis to optimize crop health, yield monitoring, and resource management for modern farming.',
-            link: '#mapping-agriculture'
+            link: 'services/mapping-agriculture.html'
         },
         {
             image: 'assets/image/field.png',
             title: 'Thermal Imaging',
             description: 'Advanced thermal imaging for infrastructure inspection, energy audits, and identifying potential issues before they become costly problems.',
-            link: '#thermal-imaging'
+            link: 'services/thermal-imaging.html'
         }
     ];
 
@@ -315,32 +316,32 @@ const createServicesSection = () => {
     services.forEach(service => {
         const serviceCard = document.createElement('div');
         serviceCard.className = 'service-card';
-        
+
         const imageContainer = document.createElement('div');
         imageContainer.className = 'service-card-image';
-        
+
         const image = document.createElement('img');
         image.src = service.image;
         image.alt = service.title;
-        
+
         imageContainer.appendChild(image);
-        
+
         const contentContainer = document.createElement('div');
         contentContainer.className = 'service-card-content';
-        
+
         const cardTitle = document.createElement('h3');
         cardTitle.className = 'service-card-title';
         cardTitle.textContent = service.title;
-        
+
         const cardText = document.createElement('p');
         cardText.className = 'service-card-text';
         cardText.textContent = service.description;
-        
+
         const cardLink = document.createElement('a');
         cardLink.className = 'service-card-link';
         cardLink.href = service.link;
         cardLink.textContent = 'Learn more';
-        
+
         // Arrow icon
         const arrowIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         arrowIcon.setAttribute('width', '18');
@@ -351,106 +352,106 @@ const createServicesSection = () => {
         arrowIcon.setAttribute('stroke-width', '2');
         arrowIcon.setAttribute('stroke-linecap', 'round');
         arrowIcon.setAttribute('stroke-linejoin', 'round');
-        
+
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         path.setAttribute('d', 'M5 12h14M12 5l7 7-7 7');
         arrowIcon.appendChild(path);
-        
+
         cardLink.appendChild(arrowIcon);
-        
+
         contentContainer.appendChild(cardTitle);
         contentContainer.appendChild(cardText);
         contentContainer.appendChild(cardLink);
-        
+
         serviceCard.appendChild(imageContainer);
         serviceCard.appendChild(contentContainer);
-        
+
         servicesGrid.appendChild(serviceCard);
     });
 
     container.appendChild(servicesGrid);
-    
+
     // Stats section
     const statsSection = document.createElement('div');
     statsSection.className = 'number-counter';
-    
+
     const statsData = [
         { number: '150+', text: 'Projects Completed' },
         { number: '25+', text: 'Agricultural Clients' },
         { number: '500+', text: 'Flight Hours' },
         { number: '1000+', text: 'Acres Surveyed' }
     ];
-    
+
     statsData.forEach(stat => {
         const statItem = document.createElement('div');
         statItem.className = 'counter-item';
-        
+
         const number = document.createElement('div');
         number.className = 'counter-number';
         number.textContent = stat.number;
-        
+
         const text = document.createElement('div');
         text.className = 'counter-text';
         text.textContent = stat.text;
-        
+
         statItem.appendChild(number);
         statItem.appendChild(text);
-        
+
         statsSection.appendChild(statItem);
     });
-    
+
     container.appendChild(statsSection);
     section.appendChild(container);
-    
+
     // Add the services section to the wrapper
     wrapper.appendChild(section);
-    
+
     // Create the parallax section
     const parallaxSection = document.createElement('div');
     parallaxSection.className = 'parallax-section fade-in';
     parallaxSection.style.backgroundImage = "url('assets/image/drone_above_cropField.jpeg')";
     parallaxSection.style.height = "350px";
-    
+
     // Create overlay
     const overlay = document.createElement('div');
     overlay.className = 'parallax-overlay';
-    
+
     // Create content
     const parallaxContent = document.createElement('div');
     parallaxContent.className = 'parallax-content';
-    
+
     const parallaxTitle = document.createElement('h2');
     parallaxTitle.className = 'parallax-title';
     parallaxTitle.style.fontSize = "32px";
     parallaxTitle.textContent = 'Transforming Agriculture with Drone Technology';
-    
+
     const parallaxText = document.createElement('p');
     parallaxText.className = 'parallax-text';
     parallaxText.style.fontSize = "16px";
     parallaxText.style.margin = "0 auto 20px";
     parallaxText.textContent = 'Our drone solutions provide farmers with unprecedented insights into their fields, helping to optimize crop yields, reduce costs, and enhance sustainability.';
-    
+
     const parallaxButton = document.createElement('a');
     parallaxButton.href = '#contact';
     parallaxButton.className = 'button';
     parallaxButton.style.padding = "12px 24px";
     parallaxButton.style.fontSize = "15px";
     parallaxButton.textContent = 'Get Started';
-    
+
     parallaxContent.appendChild(parallaxTitle);
     parallaxContent.appendChild(parallaxText);
     parallaxContent.appendChild(parallaxButton);
-    
+
     parallaxSection.appendChild(overlay);
     parallaxSection.appendChild(parallaxContent);
-    
+
     // Add the parallax section to the wrapper
     wrapper.appendChild(parallaxSection);
-    
+
     // Add the scroll animation observer
     setTimeout(() => {
         const fadeElements = wrapper.querySelectorAll('.fade-in');
-        
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -460,7 +461,7 @@ const createServicesSection = () => {
         }, {
             threshold: 0.1
         });
-        
+
         fadeElements.forEach(element => {
             observer.observe(element);
         });
@@ -473,7 +474,7 @@ const createServicesSection = () => {
 const createParallaxSection = () => {
     const section = document.createElement('section');
     section.className = 'parallax-section fade-in';
-    
+
     // Simplified markup for better performance
     section.innerHTML = `
         <div class="parallax-overlay"></div>
@@ -487,7 +488,7 @@ const createParallaxSection = () => {
             </div>
         </div>
     `;
-    
+
     return section;
 };
 
@@ -505,7 +506,7 @@ document.addEventListener('DOMContentLoaded', () => {
         threshold: 0.1,
         rootMargin: '50px'
     });
-    
+
     // Initialize any section-specific code if needed
 });
 

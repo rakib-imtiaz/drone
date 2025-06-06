@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapping & Agriculture - Sequoia Drone</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/6062/6062647.png" type="image/png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+    <style>
+        /* Interactive Button Effects */
+        .interactive-button {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .interactive-button::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+        }
+
+        .interactive-button:hover::after {
+            transform: translateX(100%);
+            transition: transform 0.5s ease;
+        }
+
+        /* Map Comparison Slider */
+        .map-comparison {
+            position: relative;
+        }
+
+        .map-slider .before,
+        .map-slider .after {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .map-slider .after {
+            clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
+        }
+
+        .slider-handle {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: white;
+            cursor: ew-resize;
+            transform: translateX(-50%);
+        }
+
+        /* Data Visualization Animation */
+        .data-visualization {
+            position: absolute;
+            inset: 0;
+            opacity: 0.1;
+            background: repeating-linear-gradient(45deg,
+                    #4ade80 0%,
+                    transparent 10%);
+            animation: dataFlow 20s linear infinite;
+        }
+
+        @keyframes dataFlow {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+
+        /* Add floating animation */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Add glowing text effect */
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 5px rgba(74, 222, 128, 0.5);
+            }
+
+            50% {
+                text-shadow: 0 0 20px rgba(74, 222, 128, 0.8);
+            }
+
+            100% {
+                text-shadow: 0 0 5px rgba(74, 222, 128, 0.5);
+            }
+        }
+
+        /* Enhanced card hover effects */
+        .data-card {
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+
+        .data-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+        }
+
+        /* Particle background */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        /* Enhanced animations */
+        .animate-glow {
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+
+            0%,
+            100% {
+                text-shadow: 0 0 5px rgba(74, 222, 128, 0.5);
+            }
+
+            50% {
+                text-shadow: 0 0 20px rgba(74, 222, 128, 0.8),
+                    0 0 30px rgba(74, 222, 128, 0.6);
+            }
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Enhanced button hover effects */
+        .interactive-button {
+            position: relative;
+            overflow: hidden;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+
+        .interactive-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .interactive-button::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transform: translateX(-100%);
+        }
+
+        .interactive-button:hover::after {
+            transform: translateX(100%);
+            transition: transform 0.5s ease;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-900 text-white overflow-x-hidden">
+    <div id="header-container"></div>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0">
+            <!-- Fallback if image missing -->
+            <img src="../assets/image/drone_above_field.png" alt="Agriculture Drone" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-black bg-opacity-60"></div>
+        </div>
+        <div class="relative z-10 container mx-auto px-4 py-20">
+            <div class="max-w-3xl mx-auto text-center space-y-8">
+                <h1 class="text-4xl md:text-6xl font-bold leading-tight animate-glow">
+                    <span class="block text-green-400">PRECISION</span>
+                    <span class="block">AGRICULTURE</span>
+                    <span class="block">MAPPING</span>
+                </h1>
+                <p class="text-xl text-gray-200">
+                    Transform your agricultural operations with cutting-edge drone mapping technology
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <a href="#services"
+                        class="interactive-button px-8 py-3 bg-green-500 rounded-lg group hover:bg-green-600 transition-all duration-300">
+                        <span class="relative z-10">Explore Services</span>
+                    </a>
+                    <a href="#demo"
+                        class="interactive-button px-8 py-3 border-2 border-white rounded-lg group hover:bg-white hover:text-gray-900 transition-all duration-300">
+                        <span class="relative z-10">View Demo Map</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3">
+                </path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Interactive Map Comparison Slider -->
+    <section id="demo" class="py-20 relative">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-16">Interactive Map Analysis</h2>
+            <div class="map-comparison relative h-[400px] rounded-xl overflow-hidden">
+                <div class="map-slider absolute inset-0">
+                    <div class="before" style="background-image: url('../assets/image/map-normal.jpg')"></div>
+                    <div class="after" style="background-image: url('../assets/image/map-ndvi.jpg')"></div>
+                    <div class="slider-handle"></div>
+                </div>
+            </div>
+            <div class="flex justify-center space-x-8 mt-8">
+                <div class="flex items-center">
+                    <div class="w-4 h-4 rounded-full bg-blue-400 mr-2"></div>
+                    <span>Standard View</span>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-4 h-4 rounded-full bg-green-400 mr-2"></div>
+                    <span>NDVI Analysis</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Visualization Cards -->
+    <section class="py-20 relative">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="data-card">
+                    <div
+                        class="relative bg-gray-800 rounded-xl p-8 overflow-hidden group hover:shadow-lg hover:shadow-green-500/30 transition-all duration-300">
+                        <h3 class="text-2xl font-bold mb-4 relative z-10">Soil Analysis</h3>
+                        <p class="text-gray-400 relative z-10">Advanced soil composition mapping and analysis</p>
+                    </div>
+                </div>
+                <div class="data-card">
+                    <div
+                        class="relative bg-gray-800 rounded-xl p-8 overflow-hidden group hover:shadow-lg hover:shadow-green-500/30 transition-all duration-300">
+                        <h3 class="text-2xl font-bold mb-4 relative z-10">Crop Health</h3>
+                        <p class="text-gray-400 relative z-10">Real-time monitoring of crop health and stress levels</p>
+                    </div>
+                </div>
+                <div class="data-card">
+                    <div
+                        class="relative bg-gray-800 rounded-xl p-8 overflow-hidden group hover:shadow-lg hover:shadow-green-500/30 transition-all duration-300">
+                        <h3 class="text-2xl font-bold mb-4 relative z-10">Yield Prediction</h3>
+                        <p class="text-gray-400 relative z-10">AI-powered yield forecasting and optimization</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Precision Agriculture Benefits -->
+    <section class="py-20 bg-gray-800">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12">Benefits of Precision Agriculture</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="benefit-card text-center">
+                    <i class="fas fa-leaf text-green-400 text-4xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Increased Crop Yield</h3>
+                    <p class="text-gray-400">Optimize resource allocation for maximum productivity</p>
+                </div>
+                <div class="benefit-card text-center">
+                    <i class="fas fa-tint text-green-400 text-4xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Water Conservation</h3>
+                    <p class="text-gray-400">Efficient irrigation management based on real-time data</p>
+                </div>
+                <div class="benefit-card text-center">
+                    <i class="fas fa-seedling text-green-400 text-4xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Reduced Chemical Usage</h3>
+                    <p class="text-gray-400">Targeted application of fertilizers and pesticides</p>
+                </div>
+                <div class="benefit-card text-center">
+                    <i class="fas fa-chart-line text-green-400 text-4xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2">Data-Driven Decisions</h3>
+                    <p class="text-gray-400">Make informed choices based on comprehensive analytics</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Timeline -->
+    <section class="py-20 relative">
+        <div class="container mx-auto px-4">
+            <div class="timeline relative">
+                <div class="timeline-line absolute h-full w-1 bg-green-500/20 left-1/2 transform -translate-x-1/2">
+                </div>
+                <div class="timeline-items space-y-24">
+                    <div class="timeline-item flex justify-between items-center">
+                        <div class="w-5/12 pr-8 text-right">
+                            <h3 class="text-2xl font-bold mb-4">Flight Planning</h3>
+                            <p class="text-gray-400">Strategic mission planning for optimal coverage and data collection
+                            </p>
+                        </div>
+                        <div
+                            class="timeline-dot w-6 h-6 bg-green-500 rounded-full relative z-10 flex items-center justify-center">
+                            <i class="fas fa-map-marked-alt text-white text-xs"></i>
+                        </div>
+                        <div class="w-5/12 pl-8"></div>
+                    </div>
+                    <div class="timeline-item flex justify-between items-center">
+                        <div class="w-5/12 pr-8"></div>
+                        <div
+                            class="timeline-dot w-6 h-6 bg-green-500 rounded-full relative z-10 flex items-center justify-center">
+                            <i class="fas fa-drone text-white text-xs"></i>
+                        </div>
+                        <div class="w-5/12 pl-8">
+                            <h3 class="text-2xl font-bold mb-4">Data Acquisition</h3>
+                            <p class="text-gray-400">Precise aerial mapping using state-of-the-art drone technology</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item flex justify-between items-center">
+                        <div class="w-5/12 pr-8 text-right">
+                            <h3 class="text-2xl font-bold mb-4">Data Processing</h3>
+                            <p class="text-gray-400">Advanced algorithms for accurate data analysis and interpretation
+                            </p>
+                        </div>
+                        <div
+                            class="timeline-dot w-6 h-6 bg-green-500 rounded-full relative z-10 flex items-center justify-center">
+                            <i class="fas fa-cogs text-white text-xs"></i>
+                        </div>
+                        <div class="w-5/12 pl-8"></div>
+                    </div>
+                    <div class="timeline-item flex justify-between items-center">
+                        <div class="w-5/12 pr-8"></div>
+                        <div
+                            class="timeline-dot w-6 h-6 bg-green-500 rounded-full relative z-10 flex items-center justify-center">
+                            <i class="fas fa-chart-line text-white text-xs"></i>
+                        </div>
+                        <div class="w-5/12 pl-8">
+                            <h3 class="text-2xl font-bold mb-4">Insights Delivery</h3>
+                            <p class="text-gray-400">Comprehensive reports and actionable insights for informed
+                                decision-making</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-container"></div>
+
+    <script src="../section/header.js" defer></script>
+    <script src="../section/footer.js" defer></script>
+    <script>
+        // GSAP Animations for timeline
+        document.addEventListener('DOMContentLoaded', () => {
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            timelineItems.forEach((item, index) => {
+                gsap.from(item, {
+                    opacity: 0,
+                    y: 50,
+                    duration: 1,
+                    delay: index * 0.2,
+                    scrollTrigger: {
+                        trigger: item,
+                        start: 'top 80%',
+                        toggleActions: 'play none none reverse'
+                    }
+                });
+            });
+        });
+        // Map Comparison Slider
+        document.addEventListener('DOMContentLoaded', () => {
+            const slider = document.querySelector('.map-slider');
+            if (!slider) return;
+            const handle = slider.querySelector('.slider-handle');
+            const afterImage = slider.querySelector('.after');
+            let isDragging = false;
+            const updateSlider = (x) => {
+                const rect = slider.getBoundingClientRect();
+                const percent = Math.max(0, Math.min(1, (x - rect.left) / rect.width));
+                handle.style.left = `${percent * 100}%`;
+                afterImage.style.clipPath = `polygon(${percent * 100}% 0, 100% 0, 100% 100%, ${percent * 100}% 100%)`;
+            };
+            handle.addEventListener('mousedown', (e) => {
+                isDragging = true;
+            });
+            window.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                updateSlider(e.clientX);
+            });
+            window.addEventListener('mouseup', () => {
+                isDragging = false;
+            });
+            // Touch support
+            handle.addEventListener('touchstart', (e) => {
+                isDragging = true;
+            });
+            window.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                updateSlider(e.touches[0].clientX);
+            });
+            window.addEventListener('touchend', () => {
+                isDragging = false;
+            });
+        });
+    </script>
+</body>
+
+</html>

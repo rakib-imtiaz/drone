@@ -1,0 +1,43 @@
+# TODO Checklist for Sequoia Drone Services
+
+## ✅ Completed
+- [x] Modular project structure (css/, section/, assets/)
+- [x] index.html with performance optimizations
+- [x] Header section (header.js)
+- [x] Hero section (section1.js)
+- [x] Services section (section2.js)
+- [x] Testimonials section (section3.js)
+- [x] Footer section (footer.js)
+- [x] Three.js integration for 3D drone model
+- [x] GSAP animations
+- [x] Intersection Observer for scroll animations
+- [x] Device detection and performance optimizations
+- [x] Deferred/lazy script loading
+- [x] Modular CSS for each section
+
+## ⬜ To Do
+- [ ] Complete all service subsections:
+  - [ ] Photo / Video
+  - [ ] Asset Inspection
+  - [ ] Thermal Imaging & Inspections
+  - [ ] Mapping & Agriculture Applications
+  - [ ] Real Estate Photography
+  - [ ] Search & Rescue, Municipal Applications
+  - [ ] Events / Livestream
+- [ ] Implement Contact Us section with form and info
+- [ ] Add form validation and submission handling
+- [ ] Add loading states for 3D models
+- [ ] Error handling for resource loading
+- [ ] Add/optimize meta tags for SEO
+- [ ] Add/optimize accessibility features (alt text, ARIA, etc.)
+- [ ] Cross-browser and mobile responsiveness testing
+- [ ] Optimize images and textures (compression, lazy loading)
+- [ ] Add favicon and meta images
+- [ ] Implement security headers
+- [ ] Add error pages (404, etc.)
+- [ ] Implement caching strategies
+- [ ] Add analytics tracking
+- [ ] Add/complete documentation (README, component docs)
+- [ ] Set up testing framework
+- [ ] Set up CI/CD pipeline
+- [ ] Add monitoring and error tracking 
